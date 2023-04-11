@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GeradorChave.Models"
+             xmlns:viewModels="clr-namespace:GeradorChave.ViewModels"
+             x:DataType="viewModels:GeradorViewModel"
+             x:Class="GeradorChave.Views.GeradorView"
+             Title="Gerador Liberação">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DatePicker Format="dd/MM/yyyy" Date="{Binding FirstData}"  Margin="30,30,0,30" Grid.Row="0" Grid.Column="0"/>
+        <DatePicker Format="dd/MM/yyyy" Date="{Binding SecondData}"  Margin="30,30,0,30" Grid.Row="0" Grid.Column="1"/>
+        <Entry Placeholder="numero" Text="{Binding Numero}" Margin="30" Grid.Row="0" Grid.Column="2"/>
+        <Entry Placeholder="CNPJ" Text="{Binding Cnpj}" Margin="30, 0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <Button Command="{Binding AddCommand}" Margin="30" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Gerar chave" FontAttributes="Bold" TextColor="Black" FontSize="Subtitle"/>
+
+
+        <VerticalStackLayout Grid.Row="3" Margin="60,0">
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding .}" FontSize="Medium" TextColor="White" HorizontalOptions="Fill"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
